@@ -34,10 +34,6 @@ Start any software development request with:
 Using AI-DLC, build a REST API for user management
 ```
 
-The workflow automatically activates and guides you through:
-1. **Inception Phase** - Requirements, user stories, application design
-2. **Construction Phase** - Functional design, code generation, testing
-
 ## Three-Phase Workflow
 
 ### Inception Phase
@@ -82,5 +78,5 @@ aidlc-docs/
 │   ├── plans/
 │   └── {unit-name}/
 ├── aidlc-state.md
-└── audit.md
+└── ...
 ```
