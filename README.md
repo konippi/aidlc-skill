@@ -71,12 +71,16 @@ All artifacts are generated in `aidlc-docs/` directory:
 ```
 aidlc-docs/
 ├── inception/
+│   ├── plans/
+│   ├── reverse-engineering/
 │   ├── requirements/
 │   ├── user-stories/
 │   └── application-design/
 ├── construction/
 │   ├── plans/
-│   └── {unit-name}/
+│   ├── {unit-name}/
+│   └── build-and-test/
+├── operations/
 ├── aidlc-state.md
-└── ...
+└── audit.md
 ```
