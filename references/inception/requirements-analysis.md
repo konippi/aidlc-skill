@@ -74,7 +74,8 @@ Analyze whatever the user has provided:
 - **Non-Functional Requirements**: Performance, security, scalability, usability
 - **User Scenarios**: Use cases, user journeys, edge cases, error scenarios
 - **Business Context**: Goals, constraints, success criteria, stakeholder needs
-- **Technical Context**: Integration points, data requirements, system boundaries
+- **Technical Context**: Integration points with existing systems, data sources/formats, system boundaries
+  - ⚠️ Do NOT ask about implementation choices (languages, frameworks, tools) - these belong in Design phase
 - **Quality Attributes**: Reliability, maintainability, testability, accessibility
 
 ### Step 6: Generate Clarifying Questions
