@@ -67,7 +67,7 @@ Analyze whatever the user has provided:
 
 ### Step 5: Thorough Completeness Analysis
 
-**CRITICAL**: Use comprehensive analysis to evaluate requirements completeness. Default to asking questions when there is ANY ambiguity or missing detail.
+**CRITICAL**: Use comprehensive analysis to evaluate requirements completeness. Default to asking questions when there is ANY ambiguity or missing detail. Focus on WHAT needs to be achieved and WHY, NOT HOW to implement it.
 
 **MANDATORY**: Evaluate ALL of these areas and ask questions for ANY that are unclear:
 - **Functional Requirements**: Core features, user interactions, system behaviors
