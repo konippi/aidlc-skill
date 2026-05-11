@@ -1,193 +1,99 @@
-# Infrastructure Design - Detailed Steps
-
-## Overview
-
-Map application components to infrastructure services for each unit through two integrated parts:
-- **Part 1 - Planning**: Create infrastructure mapping plan
-- **Part 2 - Generation**: Execute approved plan to generate infrastructure design artifacts
+# Infrastructure Design
 
 ## Prerequisites
+- Functional Design must be complete for the unit
+- NFR Design recommended (provides logical components to map)
+- Execution plan must indicate Infrastructure Design stage should execute
 
-- NFR Design must be complete for the unit (if executed)
-- Technology stack must be selected
-- Scalability and reliability requirements must be defined
+## Overview
+Map logical software components to actual infrastructure choices for deployment environments.
 
----
+## Steps to Execute
 
-# PART 1: PLANNING
+### Step 1: Analyze Design Artifacts
+- Read functional design from `aidlc-docs/construction/{unit-name}/functional-design/`
+- Read NFR design from `aidlc-docs/construction/{unit-name}/nfr-design/` (if exists)
+- Identify logical components needing infrastructure
 
-## Step 1: Analyze Infrastructure Context
+### Step 2: Create Infrastructure Design Plan
+- Generate plan with checkboxes [] for infrastructure design
+- Focus on mapping to actual services (AWS, Azure, GCP, on-premise)
+- Each step should have a checkbox []
 
-- [ ] Read NFR design artifacts
-- [ ] Read technology stack selection
-- [ ] Identify compute, storage, and networking needs
-- [ ] Review scalability and reliability requirements
+### Step 3: Generate Context-Appropriate Questions
+**DIRECTIVE**: Thoroughly analyze the functional and NFR design to identify ALL areas where clarification would improve infrastructure decisions. Be proactive in asking questions to ensure comprehensive infrastructure coverage.
 
-## Step 2: Create Infrastructure Design Plan
+**CRITICAL**: Default to asking questions when there is ANY ambiguity or missing detail that could affect infrastructure quality. It's better to ask too many questions than to make incorrect infrastructure assumptions.
 
-- [ ] Identify infrastructure components:
-  - Compute resources (containers, serverless, VMs)
-  - Database services (relational, NoSQL, cache)
-  - Storage services (object, file, block)
-  - Networking (VPC, load balancers, CDN)
-  - Security services (IAM, secrets management, WAF)
-  - Observability services (logging, monitoring, tracing)
-- [ ] Create explicit steps for design
-- [ ] Number each step sequentially
-- [ ] Add checkboxes [ ] for each step
+**MANDATORY**: Evaluate ALL of the following categories by asking targeted questions about each. For each category, determine applicability based on evidence from the functional and NFR design artifacts -- do not skip categories without explicit justification:
 
-## Step 3: Generate Context-Appropriate Questions
+- EMBED questions using [Answer]: tag format
+- Focus on ANY ambiguities, missing information, or areas needing clarification
+- Generate questions wherever user input would improve infrastructure decisions
+- **When in doubt, ask the question** - overconfidence leads to poor infrastructure choices
 
-Generate questions using [Answer]: tag format:
+**Question categories to evaluate** (consider ALL categories):
+- **Deployment Environment** - Ask about cloud provider preferences, environment setup, and deployment targets
+- **Compute Infrastructure** - Ask about compute service choices, sizing, and scaling requirements
+- **Storage Infrastructure** - Ask about database selection, storage patterns, and data lifecycle needs
+- **Messaging Infrastructure** - Ask about messaging/queuing services, event-driven patterns, and async processing
+- **Networking Infrastructure** - Ask about load balancing, API gateway approach, and network topology
+- **Monitoring Infrastructure** - Ask about observability tooling, alerting strategy, and logging requirements
+- **Shared Infrastructure** - Ask about infrastructure sharing strategy, multi-tenancy, and resource isolation
+
+### Step 4: Store Plan
+- Save as `aidlc-docs/construction/plans/{unit-name}-infrastructure-design-plan.md`
+- Include all [Answer]: tags for user input
+
+### Step 5: Collect and Analyze Answers
+- Wait for user to complete all [Answer]: tags
+- Review for vague or ambiguous responses
+- Add follow-up questions if needed
+
+### Step 6: Generate Infrastructure Design Artifacts
+- Create `aidlc-docs/construction/{unit-name}/infrastructure-design/infrastructure-design.md`
+- Create `aidlc-docs/construction/{unit-name}/infrastructure-design/deployment-architecture.md`
+- If shared infrastructure: Create `aidlc-docs/construction/shared-infrastructure.md`
+
+### Step 7: Present Completion Message
+- Present completion message in this structure:
+     1. **Completion Announcement** (mandatory): Always start with this:
 
 ```markdown
-### Compute Infrastructure
-
-**Q1**: What compute model is preferred (containers, serverless, VMs)?
-[Answer]: 
-
-**Q2**: What container orchestration platform (if applicable)?
-[Answer]: 
-
-### Database Infrastructure
-
-**Q3**: What database service should be used?
-[Answer]: 
-
-**Q4**: What caching service is needed?
-[Answer]: 
-
-### Cloud Provider
-
-**Q5**: What cloud provider is being used?
-[Answer]: 
-
-**Q6**: Are there any specific service preferences or constraints?
-[Answer]: 
+# 🏢 Infrastructure Design Complete - [unit-name]
 ```
 
-## Step 4: Collect and Analyze Answers
-
-- [ ] Wait for user to provide answers
-- [ ] Analyze answers for completeness
-- [ ] Generate follow-up questions if needed
-
-## Step 5: Create Plan Document
-
-Save complete plan as `aidlc-docs/construction/plans/{unit-name}-infrastructure-design-plan.md`
-
-## Step 6: Wait for Explicit Approval
-
-- **DO NOT PROCEED until user explicitly approves**
-
-
----
-
-# PART 2: GENERATION
-
-## Step 7: Load Infrastructure Design Plan
-
-- [ ] Read the complete plan
-- [ ] Identify the next uncompleted step
-- [ ] Load the context for that step
-
-## Step 8: Execute Current Step
-
-Generate infrastructure design artifacts based on current step:
-
-### Compute Design
-- Container/serverless architecture
-- Resource sizing and limits
-- Auto-scaling configuration
-- Deployment topology
-
-### Database Design
-- Database service selection
-- Instance sizing
-- Replication strategy
-- Backup configuration
-
-### Networking Design
-- VPC/network architecture
-- Load balancer configuration
-- DNS and routing
-- CDN configuration
-
-### Security Infrastructure
-- IAM roles and policies
-- Secrets management
-- Network security groups
-- WAF rules
-
-### Observability Infrastructure
-- Logging service configuration
-- Monitoring dashboards
-- Alerting setup
-- Tracing configuration
-
-## Step 9: Update Progress
-
-- [ ] Mark the completed step as [x] in the plan
-- [ ] Update `aidlc-docs/aidlc-state.md` current status
-- [ ] Save generated artifacts
-
-## Step 10: Continue or Complete
-
-- [ ] If more steps remain, return to Step 7
-- [ ] If all steps complete, proceed to completion message
-
-## Step 11: Present Completion Message
+     2. **AI Summary** (optional): Provide structured bullet-point summary of infrastructure design
+        - Format: "Infrastructure design has mapped [description]:"
+        - List key infrastructure services and components (bullet points)
+        - List deployment architecture decisions and rationale
+        - Mention cloud provider choices and service mappings
+        - DO NOT include workflow instructions ("please review", "let me know", "proceed to next phase", "before we proceed")
+        - Keep factual and content-focused
+     3. **Formatted Workflow Message** (mandatory): Always end with this exact format:
 
 ```markdown
-# 🏗️ Infrastructure Design Complete - [unit-name]
+> **📋 <u>**REVIEW REQUIRED:**</u>**  
+> Please examine the infrastructure design at: `aidlc-docs/construction/[unit-name]/infrastructure-design/`
 
-[AI-generated summary]
-- Compute architecture defined
-- Database services mapped
-- Networking configured
-- Security infrastructure planned
 
-> **📋 REVIEW REQUIRED:**  
-> Please examine: `aidlc-docs/construction/[unit-name]/infrastructure-design/`
 
-> **🚀 WHAT'S NEXT?**
+> **🚀 <u>**WHAT'S NEXT?**</u>**
 >
 > **You may:**
 >
-> 🔧 **Request Changes** - Ask for modifications
-> ✅ **Continue to Next Stage** - Proceed to **Code Generation**
-```
-
-## Step 12: Wait for Explicit Approval
-
-- **DO NOT PROCEED until user explicitly approves**
-
-## Step 13: Record Approval and Update Progress
-
-- Log approval in audit.md with timestamp
-- Mark Infrastructure Design stage as complete for this unit
+> 🔧 **Request Changes** - Ask for modifications to the infrastructure design based on your review  
+> ✅ **Continue to Next Stage** - Approve infrastructure design and proceed to **Code Generation**
 
 ---
+```
 
-## Output Artifacts
+### Step 8: Wait for Explicit Approval
+- Do not proceed until the user explicitly approves the infrastructure design
+- Approval must be clear and unambiguous
+- If user requests changes, update the design and repeat the approval process
 
-- `aidlc-docs/construction/{unit-name}/infrastructure-design/compute.md`
-- `aidlc-docs/construction/{unit-name}/infrastructure-design/database.md`
-- `aidlc-docs/construction/{unit-name}/infrastructure-design/networking.md`
-- `aidlc-docs/construction/{unit-name}/infrastructure-design/security.md`
-- `aidlc-docs/construction/{unit-name}/infrastructure-design/observability.md`
-- `aidlc-docs/construction/{unit-name}/infrastructure-design/architecture-diagram.md`
-
-## Infrastructure as Code
-
-When generating IaC artifacts:
-- Use appropriate IaC tool (Terraform, CloudFormation, CDK, Pulumi)
-- Follow cloud provider best practices
-- Include resource tagging strategy
-- Document deployment procedures
-
-## Critical Rules
-
-- **CLOUD-NATIVE**: Leverage managed services where appropriate
-- **COST-AWARE**: Consider cost implications of infrastructure choices
-- **EXPLICIT APPROVAL**: Never proceed without user approval
+### Step 9: Record Approval and Update Progress
+- Log approval in audit.md with timestamp
+- Record the user's approval response with timestamp
+- Mark Infrastructure Design stage complete in aidlc-state.md

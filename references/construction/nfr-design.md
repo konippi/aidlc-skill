@@ -1,176 +1,95 @@
-# NFR Design - Detailed Steps
-
-## Overview
-
-Incorporate NFR patterns into the design for each unit through two integrated parts:
-- **Part 1 - Planning**: Create NFR implementation design plan
-- **Part 2 - Generation**: Execute approved plan to generate NFR design artifacts
+# NFR Design
 
 ## Prerequisites
-
 - NFR Requirements must be complete for the unit
-- Technology stack must be selected
-- Functional design must be available
+- NFR requirements artifacts must be available
+- Execution plan must indicate NFR Design stage should execute
 
----
+## Overview
+Incorporate NFR requirements into unit design using patterns and logical components.
 
-# PART 1: PLANNING
+## Steps to Execute
 
-## Step 1: Analyze NFR Requirements
+### Step 1: Analyze NFR Requirements
+- Read NFR requirements from `aidlc-docs/construction/{unit-name}/nfr-requirements/`
+- Understand scalability, performance, availability, security needs
 
-- [ ] Read NFR requirements from previous stage
-- [ ] Read selected technology stack
-- [ ] Identify patterns needed for each NFR category
-- [ ] Review functional design for integration points
+### Step 2: Create NFR Design Plan
+- Generate plan with checkboxes [] for NFR design
+- Focus on design patterns and logical components
+- Each step should have a checkbox []
 
-## Step 2: Create NFR Design Plan
+### Step 3: Generate Context-Appropriate Questions
+**DIRECTIVE**: Thoroughly analyze the NFR requirements to identify ALL areas where clarification would improve NFR design quality. Be proactive in asking questions to ensure comprehensive non-functional design coverage.
 
-- [ ] Map NFRs to implementation patterns:
-  - Performance patterns (caching, connection pooling, async processing)
-  - Security patterns (authentication flows, authorization checks, encryption)
-  - Scalability patterns (horizontal scaling, load balancing, sharding)
-  - Reliability patterns (circuit breaker, retry, fallback)
-  - Observability patterns (structured logging, metrics, distributed tracing)
-- [ ] Create explicit steps for design
-- [ ] Number each step sequentially
-- [ ] Add checkboxes [ ] for each step
+**CRITICAL**: Default to asking questions when there is ANY ambiguity or missing detail that could affect NFR design quality. It's better to ask too many questions than to make incorrect assumptions about non-functional patterns.
 
-## Step 3: Generate Context-Appropriate Questions
+**MANDATORY**: Evaluate ALL of the following categories by asking targeted questions about each. For each category, determine applicability based on evidence from the NFR requirements -- do not skip categories without explicit justification:
 
-Generate questions using [Answer]: tag format:
+- EMBED questions using [Answer]: tag format
+- Focus on ANY ambiguities, missing information, or areas needing clarification
+- Generate questions wherever user input would improve pattern and component decisions
+- **When in doubt, ask the question** - overconfidence leads to poor non-functional designs
+
+**Question categories to evaluate** (consider ALL categories):
+- **Resilience Patterns** - Ask about fault tolerance approach, retry strategies, and failure recovery expectations
+- **Scalability Patterns** - Ask about scaling mechanisms, load boundaries, and growth projections
+- **Performance Patterns** - Ask about optimization strategy, latency targets, and throughput requirements
+- **Security Patterns** - Ask about security implementation approach, threat model, and compliance constraints
+- **Logical Components** - Ask about infrastructure components (queues, caches, circuit breakers, etc.) and their integration patterns
+
+### Step 4: Store Plan
+- Save as `aidlc-docs/construction/plans/{unit-name}-nfr-design-plan.md`
+- Include all [Answer]: tags for user input
+
+### Step 5: Collect and Analyze Answers
+- Wait for user to complete all [Answer]: tags
+- Review for vague or ambiguous responses
+- Add follow-up questions if needed
+
+### Step 6: Generate NFR Design Artifacts
+- Create `aidlc-docs/construction/{unit-name}/nfr-design/nfr-design-patterns.md`
+- Create `aidlc-docs/construction/{unit-name}/nfr-design/logical-components.md`
+
+### Step 7: Present Completion Message
+- Present completion message in this structure:
+     1. **Completion Announcement** (mandatory): Always start with this:
 
 ```markdown
-### Performance Design
-
-**Q1**: What caching strategy should be used?
-[Answer]: 
-
-**Q2**: Are there any async processing requirements?
-[Answer]: 
-
-### Security Design
-
-**Q3**: What authentication flow is preferred?
-[Answer]: 
-
-### Reliability Design
-
-**Q4**: What retry/fallback strategies are needed?
-[Answer]: 
+# 🎨 NFR Design Complete - [unit-name]
 ```
 
-## Step 4: Collect and Analyze Answers
-
-- [ ] Wait for user to provide answers
-- [ ] Analyze answers for completeness
-- [ ] Generate follow-up questions if needed
-
-## Step 5: Create Plan Document
-
-Save complete plan as `aidlc-docs/construction/plans/{unit-name}-nfr-design-plan.md`
-
-## Step 6: Wait for Explicit Approval
-
-- **DO NOT PROCEED until user explicitly approves**
-
-
----
-
-# PART 2: GENERATION
-
-## Step 7: Load NFR Design Plan
-
-- [ ] Read the complete plan
-- [ ] Identify the next uncompleted step
-- [ ] Load the context for that step
-
-## Step 8: Execute Current Step
-
-Generate NFR design artifacts based on current step:
-
-### Performance Design
-- Caching layer design
-- Connection pool configuration
-- Async processing design
-- Query optimization strategies
-
-### Security Design
-- Authentication flow diagrams
-- Authorization matrix
-- Encryption implementation
-- Security middleware design
-
-### Scalability Design
-- Horizontal scaling architecture
-- Load balancer configuration
-- Database sharding strategy
-- Message queue design
-
-### Reliability Design
-- Circuit breaker configuration
-- Retry policies
-- Fallback strategies
-- Health check design
-
-### Observability Design
-- Logging format and levels
-- Metrics collection points
-- Distributed tracing setup
-- Alerting rules
-
-## Step 9: Update Progress
-
-- [ ] Mark the completed step as [x] in the plan
-- [ ] Update `aidlc-docs/aidlc-state.md` current status
-- [ ] Save generated artifacts
-
-## Step 10: Continue or Complete
-
-- [ ] If more steps remain, return to Step 7
-- [ ] If all steps complete, proceed to completion message
-
-## Step 11: Present Completion Message
+     2. **AI Summary** (optional): Provide structured bullet-point summary of NFR design
+        - Format: "NFR design has incorporated [description]:"
+        - List key design patterns implemented (bullet points)
+        - List logical components and infrastructure elements
+        - Mention resilience, scalability, and performance patterns applied
+        - DO NOT include workflow instructions ("please review", "let me know", "proceed to next phase", "before we proceed")
+        - Keep factual and content-focused
+     3. **Formatted Workflow Message** (mandatory): Always end with this exact format:
 
 ```markdown
-# 🛡️ NFR Design Complete - [unit-name]
+> **📋 <u>**REVIEW REQUIRED:**</u>**  
+> Please examine the NFR design at: `aidlc-docs/construction/[unit-name]/nfr-design/`
 
-[AI-generated summary]
-- Performance patterns designed
-- Security implementation planned
-- Reliability patterns incorporated
 
-> **📋 REVIEW REQUIRED:**  
-> Please examine: `aidlc-docs/construction/[unit-name]/nfr-design/`
 
-> **🚀 WHAT'S NEXT?**
+> **🚀 <u>**WHAT'S NEXT?**</u>**
 >
 > **You may:**
 >
-> 🔧 **Request Changes** - Ask for modifications
-> ✅ **Continue to Next Stage** - Proceed to **Infrastructure Design**
-```
-
-## Step 12: Wait for Explicit Approval
-
-- **DO NOT PROCEED until user explicitly approves**
-
-## Step 13: Record Approval and Update Progress
-
-- Log approval in audit.md with timestamp
-- Mark NFR Design stage as complete for this unit
+> 🔧 **Request Changes** - Ask for modifications to the NFR design based on your review  
+> ✅ **Continue to Next Stage** - Approve NFR design and proceed to **[next-stage-name]**
 
 ---
+```
 
-## Output Artifacts
+### Step 8: Wait for Explicit Approval
+- Do not proceed until the user explicitly approves the NFR design
+- Approval must be clear and unambiguous
+- If user requests changes, update the design and repeat the approval process
 
-- `aidlc-docs/construction/{unit-name}/nfr-design/performance-design.md`
-- `aidlc-docs/construction/{unit-name}/nfr-design/security-design.md`
-- `aidlc-docs/construction/{unit-name}/nfr-design/scalability-design.md`
-- `aidlc-docs/construction/{unit-name}/nfr-design/reliability-design.md`
-- `aidlc-docs/construction/{unit-name}/nfr-design/observability-design.md`
-
-## Critical Rules
-
-- **PATTERN-BASED**: Use established patterns for NFR implementation
-- **TECHNOLOGY-ALIGNED**: Patterns must align with selected tech stack
-- **EXPLICIT APPROVAL**: Never proceed without user approval
+### Step 9: Record Approval and Update Progress
+- Log approval in audit.md with timestamp
+- Record the user's approval response with timestamp
+- Mark NFR Design stage complete in aidlc-state.md

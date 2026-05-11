@@ -1,110 +1,73 @@
-# Workspace Detection - Detailed Steps
+# Workspace Detection
 
-## Overview
+**Purpose**: Determine workspace state and check for existing AI-DLC projects
 
-Analyze workspace state and determine project type. This stage ALWAYS executes as the first step of any AI-DLC workflow.
+## Step 1: Verify Fresh Workflow
 
-## Prerequisites
+This step runs only on fresh workflows (session resume is handled in SKILL.md initialization Step 1 before reaching this stage). Proceed directly to Step 2.
 
-- AI-DLC workflow initialized
-- `aidlc-docs/aidlc-state.md` created
-- `aidlc-docs/audit.md` created
+## Step 2: Scan Workspace for Existing Code
 
-## Execution Steps
+**Determine if workspace has existing code:**
+- Scan workspace for source code files (.java, .py, .js, .ts, .jsx, .tsx, .kt, .kts, .scala, .groovy, .go, .rs, .rb, .php, .c, .h, .cpp, .hpp, .cc, .cs, .fs, etc.)
+- Check for build files (pom.xml, package.json, build.gradle, etc.)
+- Look for project structure indicators
+- Identify workspace root directory (NOT aidlc-docs/)
 
-### Step 1: Log Initial User Request
-
-**MANDATORY**: Log the complete raw user input in `aidlc-docs/audit.md`
-
+**Record findings:**
 ```markdown
-## Workflow Initialization
-**Timestamp**: [ISO 8601 timestamp]
-**User Input**: "[Complete raw user input - NEVER summarize]"
-**AI Response**: "Starting Workspace Detection"
-**Context**: Initial request logged
+## Workspace State
+- **Existing Code**: [Yes/No]
+- **Programming Languages**: [List if found]
+- **Build System**: [Maven/Gradle/npm/etc. if found]
+- **Project Structure**: [Monolith/Microservices/Library/Empty]
+- **Workspace Root**: [Absolute path]
 ```
 
-### Step 2: Check for Existing State
+## Step 3: Determine Next Phase
 
-- Look for existing `aidlc-docs/aidlc-state.md`
-- If found, check if workflow can be resumed
-- If resuming, load previous state and continue from last checkpoint
+**IF workspace is empty (no existing code)**:
+- Set flag: `brownfield = false`
+- Next phase: Requirements Analysis
 
-### Step 3: Scan Workspace
+**IF workspace has existing code**:
+- Set flag: `brownfield = true`
+- Check for existing reverse engineering artifacts in `aidlc-docs/inception/reverse-engineering/`
+- **IF reverse engineering artifacts exist**:
+    - Check if artifacts are stale (compare artifact timestamps against codebase's last significant modification)
+    - **IF artifacts are current**: Load them, skip to Requirements Analysis
+    - **IF artifacts are stale**: Next phase is Reverse Engineering (rerun to refresh artifacts)
+    - **IF user explicitly requests rerun**: Next phase is Reverse Engineering regardless of staleness
+- **IF no reverse engineering artifacts**: Next phase is Reverse Engineering
 
-Analyze the workspace for:
-- Existing source code files
-- Package managers (package.json, pom.xml, requirements.txt, etc.)
-- Build configurations
-- Test files
-- Documentation
+## Step 4: Update State File
 
-### Step 4: Determine Project Type
+Update `aidlc-docs/aidlc-state.md` (created during initialization) with the Project Information and Workspace State findings from Steps 2-3.
 
-**Greenfield Project**:
-- No existing source code
-- Empty or minimal workspace
-- New project from scratch
+## Step 5: Present Completion Message
 
-**Brownfield Project**:
-- Existing source code detected
-- Established project structure
-- Existing dependencies and configurations
-
-### Step 5: Check for Reverse Engineering Artifacts
-
-If brownfield, check for existing artifacts:
-- `aidlc-docs/inception/reverse-engineering/architecture.md`
-- `aidlc-docs/inception/reverse-engineering/component-inventory.md`
-- `aidlc-docs/inception/reverse-engineering/technology-stack.md`
-
-### Step 6: Log Findings
-
-Update `aidlc-docs/audit.md` with detection results.
-
-### Step 7: Update State
-
-Update `aidlc-docs/aidlc-state.md`:
-- Set Project Type
-- Set Workspace Root
-- Mark Workspace Detection as complete
-
-
-### Step 8: Present Completion Message
-
-**For Greenfield**:
+**For Brownfield Projects:**
 ```markdown
 # 🔍 Workspace Detection Complete
 
-**Project Type**: Greenfield (new project)
-**Workspace**: [path]
-
-No existing codebase detected. Starting fresh.
-
-Proceeding to **Requirements Analysis**...
+Workspace analysis findings:
+• **Project Type**: Brownfield project
+• [AI-generated summary of workspace findings in bullet points]
+• **Next Step**: Proceeding to **Reverse Engineering** to analyze existing codebase...
 ```
 
-**For Brownfield**:
+**For Greenfield Projects:**
 ```markdown
 # 🔍 Workspace Detection Complete
 
-**Project Type**: Brownfield (existing project)
-**Workspace**: [path]
-**Detected Technologies**: [list]
-
-Existing codebase detected. [Will analyze / Already analyzed].
-
-Proceeding to **[Reverse Engineering / Requirements Analysis]**...
+Workspace analysis findings:
+• **Project Type**: Greenfield project
+• **Next Step**: Proceeding to **Requirements Analysis**...
 ```
 
-### Step 9: Determine Next Stage
+## Step 6: Automatically Proceed
 
-- If brownfield AND no reverse engineering artifacts → Reverse Engineering
-- Otherwise → Requirements Analysis
-
-## Critical Rules
-
-- **ALWAYS** log initial user request with complete raw input
-- **ALWAYS** check for existing state before starting fresh
-- **ALWAYS** update aidlc-state.md after completion
-- Automatically proceed to next stage (no approval needed for this stage)
+- **No user approval required** - this is informational only
+- Automatically proceed to next phase:
+  - **Brownfield**: Reverse Engineering (if no existing artifacts) or Requirements Analysis (if artifacts exist)
+  - **Greenfield**: Requirements Analysis

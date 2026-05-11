@@ -60,6 +60,12 @@ Use this template to create `aidlc-docs/aidlc-state.md` at workflow start.
 | User Stories | [minimal\|standard\|comprehensive] |
 | Code Generation | [minimal\|standard\|comprehensive] |
 
+## Extension Configuration
+
+| Extension | Enabled | Decided At |
+|-----------|---------|------------|
+| [Extension Name] | [Yes/No] | [Stage where decided] |
+
 ## Notes
 
 [Any additional notes or context]

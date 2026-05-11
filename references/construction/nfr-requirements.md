@@ -1,177 +1,99 @@
-# NFR Requirements - Detailed Steps
-
-## Overview
-
-Determine Non-Functional Requirements and select technology stack for each unit through two integrated parts:
-- **Part 1 - Planning**: Identify NFR categories and create analysis plan
-- **Part 2 - Generation**: Execute approved plan to document NFRs and tech stack decisions
+# NFR Requirements
 
 ## Prerequisites
+- Functional Design must be complete for the unit
+- Unit functional design artifacts must be available
+- Execution plan must indicate NFR Requirements stage should execute
 
-- Functional Design must be complete for the unit (if executed)
-- Unit boundaries and responsibilities must be clear
-- Business requirements must be understood
+## Overview
+Determine non-functional requirements for the unit and make tech stack choices.
 
----
+## Steps to Execute
 
-# PART 1: PLANNING
+### Step 1: Analyze Functional Design
+- Read functional design artifacts from `aidlc-docs/construction/{unit-name}/functional-design/`
+- Understand business logic complexity and requirements
 
-## Step 1: Analyze Unit Context
+### Step 2: Create NFR Requirements Plan
+- Generate plan with checkboxes [] for NFR assessment
+- Focus on scalability, performance, availability, security
+- Each step should have a checkbox []
 
-- [ ] Read functional design artifacts (if available)
-- [ ] Identify unit's operational characteristics
-- [ ] Review system-wide NFR constraints
-- [ ] Identify integration requirements
+### Step 3: Generate Context-Appropriate Questions
+**DIRECTIVE**: Thoroughly analyze the functional design to identify ALL areas where NFR clarification would improve system quality and architecture decisions. Be proactive in asking questions to ensure comprehensive NFR coverage.
 
-## Step 2: Create NFR Analysis Plan
+**CRITICAL**: Default to asking questions when there is ANY ambiguity or missing detail that could affect system quality. It's better to ask too many questions than to make incorrect NFR assumptions.
 
-- [ ] Identify relevant NFR categories:
-  - Performance (response time, throughput)
-  - Scalability (load handling, growth)
-  - Security (authentication, authorization, data protection)
-  - Reliability (availability, fault tolerance)
-  - Maintainability (code quality, documentation)
-  - Observability (logging, monitoring, tracing)
-- [ ] Create explicit steps for analysis
-- [ ] Number each step sequentially
-- [ ] Add checkboxes [ ] for each step
+- EMBED questions using [Answer]: tag format
+- Focus on ANY ambiguities, missing information, or areas needing clarification
+- Generate questions wherever user input would improve NFR and tech stack decisions
+- **When in doubt, ask the question** - overconfidence leads to poor system quality
 
-## Step 3: Generate Context-Appropriate Questions
+**Question categories to evaluate** (consider ALL categories):
+- **Scalability Requirements** - Ask about expected load, growth patterns, scaling triggers, and capacity planning
+- **Performance Requirements** - Ask about response times, throughput, latency, and performance benchmarks
+- **Availability Requirements** - Ask about uptime expectations, disaster recovery, failover, and business continuity
+- **Security Requirements** - Ask about data protection, compliance, authentication, authorization, and threat models
+- **Tech Stack Selection** - Ask about technology preferences, constraints, existing systems, and integration requirements
+- **Reliability Requirements** - Ask about error handling, fault tolerance, monitoring, and alerting needs
+- **Maintainability Requirements** - Ask about code quality, documentation, testing, and operational requirements
+- **Usability Requirements** - Ask about user experience, accessibility, and interface requirements
 
-Generate questions using [Answer]: tag format:
+### Step 4: Store Plan
+- Save as `aidlc-docs/construction/plans/{unit-name}-nfr-requirements-plan.md`
+- Include all [Answer]: tags for user input
+
+### Step 5: Collect and Analyze Answers
+- Wait for user to complete all [Answer]: tags
+- **MANDATORY**: Carefully review ALL responses for vague or ambiguous answers
+- **CRITICAL**: Add follow-up questions for ANY unclear responses - do not proceed with ambiguity
+- Look for responses like "depends", "maybe", "not sure", "mix of", "somewhere between", "standard", "typical"
+- Create clarification questions file if ANY ambiguities are detected
+- **Do not proceed until ALL ambiguities are resolved**
+
+### Step 6: Generate NFR Requirements Artifacts
+- Create `aidlc-docs/construction/{unit-name}/nfr-requirements/nfr-requirements.md`
+- Create `aidlc-docs/construction/{unit-name}/nfr-requirements/tech-stack-decisions.md`
+
+### Step 7: Present Completion Message
+- Present completion message in this structure:
+     1. **Completion Announcement** (mandatory): Always start with this:
 
 ```markdown
-### Performance Requirements
-
-**Q1**: What are the expected response time requirements?
-[Answer]: 
-
-**Q2**: What is the expected throughput (requests/second)?
-[Answer]: 
-
-### Security Requirements
-
-**Q3**: What authentication mechanism is required?
-[Answer]: 
-
-**Q4**: What data needs to be encrypted?
-[Answer]: 
-
-### Scalability Requirements
-
-**Q5**: What is the expected user/load growth?
-[Answer]: 
-
-### Technology Preferences
-
-**Q6**: Are there any technology constraints or preferences?
-[Answer]: 
+# 📊 NFR Requirements Complete - [unit-name]
 ```
 
-## Step 4: Collect and Analyze Answers
-
-- [ ] Wait for user to provide answers
-- [ ] Analyze answers for completeness
-- [ ] Generate follow-up questions if needed
-- [ ] Identify technology implications
-
-## Step 5: Create Plan Document
-
-Save complete plan as `aidlc-docs/construction/plans/{unit-name}-nfr-requirements-plan.md`
-
-## Step 6: Wait for Explicit Approval
-
-- **DO NOT PROCEED until user explicitly approves**
-
-
----
-
-# PART 2: GENERATION
-
-## Step 7: Load NFR Requirements Plan
-
-- [ ] Read the complete plan
-- [ ] Identify the next uncompleted step
-- [ ] Load the context for that step
-
-## Step 8: Execute Current Step
-
-Generate NFR artifacts based on current step:
-
-### Performance Requirements
-- Response time targets
-- Throughput requirements
-- Resource utilization limits
-
-### Security Requirements
-- Authentication requirements
-- Authorization model
-- Data protection requirements
-- Compliance requirements
-
-### Scalability Requirements
-- Horizontal/vertical scaling needs
-- Load balancing requirements
-- Caching strategy
-
-### Technology Stack Selection
-- Language/framework selection with rationale
-- Database selection with rationale
-- Infrastructure components
-- Third-party services
-
-## Step 9: Update Progress
-
-- [ ] Mark the completed step as [x] in the plan
-- [ ] Update `aidlc-docs/aidlc-state.md` current status
-- [ ] Save generated artifacts
-
-## Step 10: Continue or Complete
-
-- [ ] If more steps remain, return to Step 7
-- [ ] If all steps complete, proceed to completion message
-
-## Step 11: Present Completion Message
+     2. **AI Summary** (optional): Provide structured bullet-point summary of NFR requirements
+        - Format: "NFR requirements assessment has identified [description]:"
+        - List key scalability, performance, availability requirements (bullet points)
+        - List security and compliance requirements identified
+        - Mention tech stack decisions and rationale
+        - DO NOT include workflow instructions ("please review", "let me know", "proceed to next phase", "before we proceed")
+        - Keep factual and content-focused
+     3. **Formatted Workflow Message** (mandatory): Always end with this exact format:
 
 ```markdown
-# ⚡ NFR Requirements Complete - [unit-name]
+> **📋 <u>**REVIEW REQUIRED:**</u>**  
+> Please examine the NFR requirements at: `aidlc-docs/construction/[unit-name]/nfr-requirements/`
 
-[AI-generated summary]
-- Performance requirements defined
-- Security requirements documented
-- Technology stack selected
 
-> **📋 REVIEW REQUIRED:**  
-> Please examine: `aidlc-docs/construction/[unit-name]/nfr-requirements/`
 
-> **🚀 WHAT'S NEXT?**
+> **🚀 <u>**WHAT'S NEXT?**</u>**
 >
 > **You may:**
 >
-> 🔧 **Request Changes** - Ask for modifications
-> ✅ **Continue to Next Stage** - Proceed to **NFR Design**
-```
-
-## Step 12: Wait for Explicit Approval
-
-- **DO NOT PROCEED until user explicitly approves**
-
-## Step 13: Record Approval and Update Progress
-
-- Log approval in audit.md with timestamp
-- Mark NFR Requirements stage as complete for this unit
+> 🔧 **Request Changes** - Ask for modifications to the NFR requirements based on your review  
+> ✅ **Continue to Next Stage** - Approve NFR requirements and proceed to **[next-stage-name]**
 
 ---
+```
 
-## Output Artifacts
+### Step 8: Wait for Explicit Approval
+- Do not proceed until the user explicitly approves the NFR requirements
+- Approval must be clear and unambiguous
+- If user requests changes, update the requirements and repeat the approval process
 
-- `aidlc-docs/construction/{unit-name}/nfr-requirements/performance.md`
-- `aidlc-docs/construction/{unit-name}/nfr-requirements/security.md`
-- `aidlc-docs/construction/{unit-name}/nfr-requirements/scalability.md`
-- `aidlc-docs/construction/{unit-name}/nfr-requirements/tech-stack.md`
-
-## Critical Rules
-
-- **FOLLOW PLAN EXACTLY**: Do not deviate from approved steps
-- **JUSTIFY DECISIONS**: All tech stack choices must have rationale
-- **EXPLICIT APPROVAL**: Never proceed without user approval
+### Step 9: Record Approval and Update Progress
+- Log approval in audit.md with timestamp
+- Record the user's approval response with timestamp
+- Mark NFR Requirements stage complete in aidlc-state.md

@@ -1,85 +1,41 @@
 # AI-DLC Welcome Message
 
-Display this message ONCE at the start of any AI-DLC workflow.
+Display this message ONCE at workflow start. Do not reload in later turns.
 
 ---
 
-# 👋 Welcome to AI-DLC (AI-Driven Development Life Cycle)! 👋
+# 👋 Welcome to AI-DLC (AI-Driven Development Life Cycle)
 
-I'll guide you through an adaptive software development workflow that intelligently tailors itself to your specific needs.
+I'll guide you through an adaptive software development workflow that tailors itself to your needs.
 
-## What is AI-DLC?
+## How it works
 
-AI-DLC is a structured yet flexible software development process that adapts to your project's needs. Think of it as having an experienced software architect who:
+AI-DLC adapts to your project:
 
-- **Analyzes your requirements** and asks clarifying questions when needed
+- **Analyzes requirements** and asks clarifying questions when needed
 - **Plans the optimal approach** based on complexity and risk
-- **Skips unnecessary steps** for simple changes while providing comprehensive coverage for complex projects
-- **Documents everything** so you have a complete record of decisions and rationale
-- **Guides you through each phase** with clear checkpoints and approval gates
+- **Skips unnecessary steps** for simple changes, provides full coverage for complex projects
+- **Documents everything** with a complete audit trail
+- **Requires your approval** at every major checkpoint
 
-## The Three-Phase Lifecycle
+## Three-phase lifecycle
 
-```
-                         User Request
-                              |
-                              v
-        ╔═══════════════════════════════════════╗
-        ║     INCEPTION PHASE                   ║
-        ║     Planning & Application Design     ║
-        ╠═══════════════════════════════════════╣
-        ║ • Workspace Detection (ALWAYS)        ║
-        ║ • Reverse Engineering (COND)          ║
-        ║ • Requirements Analysis (ALWAYS)      ║
-        ║ • User Stories (CONDITIONAL)          ║
-        ║ • Workflow Planning (ALWAYS)          ║
-        ║ • Application Design (CONDITIONAL)    ║
-        ║ • Units Generation (CONDITIONAL)      ║
-        ╚═══════════════════════════════════════╝
-                              |
-                              v
-        ╔═══════════════════════════════════════╗
-        ║     CONSTRUCTION PHASE                ║
-        ║     Design, Implementation & Test     ║
-        ╠═══════════════════════════════════════╣
-        ║ • Per-Unit Loop (for each unit):      ║
-        ║   - Functional Design (COND)          ║
-        ║   - NFR Requirements Assess (COND)    ║
-        ║   - NFR Design (COND)                 ║
-        ║   - Infrastructure Design (COND)      ║
-        ║   - Code Generation (ALWAYS)          ║
-        ║ • Build and Test (ALWAYS)             ║
-        ╚═══════════════════════════════════════╝
-                              |
-                              v
-        ╔═══════════════════════════════════════╗
-        ║     OPERATIONS PHASE                  ║
-        ║     Placeholder for Future            ║
-        ╠═══════════════════════════════════════╣
-        ║ • Operations (PLACEHOLDER)            ║
-        ╚═══════════════════════════════════════╝
-                              |
-                              v
-                          Complete
-```
+**INCEPTION** — What to build and why
+- Workspace Detection (always) → Reverse Engineering (brownfield) → Requirements Analysis (always) → User Stories (conditional) → Workflow Planning (always) → Application Design (conditional) → Units Generation (conditional)
 
+**CONSTRUCTION** — How to build it
+- Per-unit loop: Functional Design → NFR Requirements → NFR Design → Infrastructure Design → Code Generation (always)
+- Then: Build and Test (always)
 
-## Key Principles
+**OPERATIONS** — Placeholder for future deployment/monitoring workflows
 
-- ⚡ **Fully Adaptive**: Each stage independently evaluated based on your needs
-- 🎯 **Efficient**: Simple changes execute only essential stages
-- 📋 **Comprehensive**: Complex changes get full treatment with all safeguards
-- 🔍 **Transparent**: You see and approve the execution plan before work begins
-- 📝 **Documented**: Complete audit trail of all decisions and changes
-- 🎛️ **User Control**: You can request stages be included or excluded
+## What happens next
 
-## What Happens Next
-
-1. **I'll analyze your workspace** to understand if this is a new or existing project
-2. **I'll gather requirements** and ask clarifying questions if needed
-3. **I'll create an execution plan** showing which stages I propose to run and why
-4. **You'll review and approve** the plan (or request changes)
-5. **We'll execute the plan** with checkpoints at each major stage
-6. **You'll get working code** with complete documentation and tests
+1. I'll analyze your workspace (new or existing project)
+2. I'll gather requirements and ask clarifying questions
+3. I'll create an execution plan showing proposed stages
+4. You review and approve (or request changes)
+5. We execute with checkpoints at each stage
+6. You get working code with documentation and tests
 
 Let's begin!

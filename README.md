@@ -1,24 +1,38 @@
-# AI-DLC Agent Skills
+# aidlc-skill
 
-AI-Driven Development Life Cycle (AI-DLC) as [Agent Skills](https://agentskills.io/) for AI coding agents.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-green)](https://agentskills.io)
+
+AI-Driven Development Life Cycle (AI-DLC) as an [Agent Skill](https://agentskills.io/) for any compatible coding agent.
 
 ## What is AI-DLC
+
 > AI-DLC is an AI-centric transformative approach to software development that emphasizes two powerful dimensions:
-> - **AI Powered Execution with Human Oversight**: AI systematically creates detailed work plans, actively seeks clarification and guidance, and defers critical decisions to humans. This is critical since only humans possess the contextual understanding and knowledge of business requirements needed to make informed choices.
-> - **Dynamic Team Collaboration**: As AI handles the routine tasks, teams unite in collaborative spaces for real-time problem solving, creative thinking and rapid-decision-making. This shift from isolated work to high-energy teamwork accelerates innovation and delivery. 
+>
+> - **AI Powered Execution with Human Oversight**: AI systematically creates detailed work plans, actively seeks clarification, and defers critical decisions to humans.
+> - **Dynamic Team Collaboration**: AI handles routine tasks so teams can focus on problem solving, creative thinking, and rapid decision-making.
 
-For learning more about AI-DLC Methodology, read this [blog](https://aws.amazon.com/blogs/devops/ai-driven-development-life-cycle/) and the [Method Definition Paper](https://prod.d13rzhkk8cj2z0.amplifyapp.com/) referred in it.
+Learn more: the [AI-DLC blog post](https://aws.amazon.com/blogs/devops/ai-driven-development-life-cycle/) and the [Method Definition Paper](https://prod.d13rzhkk8cj2z0.amplifyapp.com/).
 
-## Installation
-
-### Using npx
+## Install
 
 ```bash
-npx add-skill konippi/aidlc-skill
+npx skills add konippi/aidlc-skill
 ```
 
+Or manually (pick the path your agent uses):
+
+```bash
+git clone https://github.com/konippi/aidlc-skill.git
+ln -s /path/to/aidlc-skill ~/.claude/skills/aidlc-skill
+ln -s /path/to/aidlc-skill ~/.kiro/skills/aidlc-skill
+ln -s /path/to/aidlc-skill ~/.agents/skills/aidlc-skill
+```
+
+For project-scoped installation, symlink into `.claude/skills/`, `.kiro/skills/`, or `.agents/skills/` in your project root instead.
+
 > [!NOTE]
-> **Kiro CLI users:** After installing skills, you need to manually add them to your custom agent's `resources` in `.kiro/agents/<agent>.json`:
+> **Kiro CLI users**: After installing skills, add them to your custom agent's `resources` in `.kiro/agents/<agent>.json`:
 >
 > ```json
 > {
@@ -30,57 +44,45 @@ npx add-skill konippi/aidlc-skill
 
 Start any software development request with:
 
-```
+```text
 Using AI-DLC, build a REST API for user management
 ```
 
-## Three-Phase Workflow
+The agent displays a welcome message, detects whether the workspace is greenfield or brownfield, and walks through the three-phase adaptive workflow with explicit approval gates between stages.
 
-### Inception Phase
-Determines **WHAT** to build and **WHY**.
+## Three-phase lifecycle
 
-| Stage | Description |
-|-------|-------------|
-| Workspace Detection | Analyze project type (greenfield/brownfield) |
-| Reverse Engineering | Analyze existing codebase |
-| Requirements Analysis | Gather and validate requirements |
-| User Stories | Create user stories and personas |
-| Workflow Planning | Create execution plan |
-| Application Design | High-level component design |
-| Units Generation | Decompose into units of work |
+| Phase              | Purpose                                  | Key stages                                                                                               |
+| ------------------ | ---------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Inception**      | What to build and why                    | Workspace Detection, Reverse Engineering, Requirements Analysis, User Stories, Workflow Planning, Application Design, Units Generation |
+| **Construction**   | How to build it (per-unit loop + tests)   | Functional Design, NFR Requirements, NFR Design, Infrastructure Design, Code Generation, Build and Test   |
+| **Operations**     | Placeholder for future deploy/monitor     | Operations (placeholder)                                                                                 |
 
-### Construction Phase
-Determines **HOW** to build it.
+See [`SKILL.md`](SKILL.md) for the exact activation contract, or open any [`references/<phase>/<stage>.md`](references/) for stage-level detail.
 
-| Stage | Description |
-|-------|-------------|
-| Functional Design | Detailed business logic design |
-| NFR Requirements | Non-functional requirements and tech stack |
-| NFR Design | Incorporate NFR patterns |
-| Infrastructure Design | Map to infrastructure services |
-| Code Generation | Generate code per unit |
-| Build and Test | Build and test all units |
+## Generated artifacts layout
 
-### Operations Phase
-Deployment and monitoring (future).
+Workflow output lands in `aidlc-docs/` in your workspace. Application code lands in the workspace root — never in `aidlc-docs/`:
 
-## Documentation
-
-All artifacts are generated in `aidlc-docs/` directory:
-
+```text
+<workspace>/
+├── [your application code]
+└── aidlc-docs/
+    ├── aidlc-state.md
+    ├── audit.md
+    ├── inception/
+    ├── construction/{unit}/
+    └── operations/
 ```
-aidlc-docs/
-├── inception/
-│   ├── plans/
-│   ├── reverse-engineering/
-│   ├── requirements/
-│   ├── user-stories/
-│   └── application-design/
-├── construction/
-│   ├── plans/
-│   ├── {unit-name}/
-│   └── build-and-test/
-├── operations/
-├── aidlc-state.md
-└── audit.md
-```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
+
+## License
+
+[MIT](LICENSE)
