@@ -8,8 +8,6 @@
     "MD060": false
   },
   "ignores": [
-    "node_modules/**",
-    ".claude/**",
-    ".kiro/**"
+    "node_modules/**"
   ]
 }
